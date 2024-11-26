@@ -1,0 +1,48 @@
+<!-- Barra superior -->
+<div class="topbar">
+    <div class="topbar-left">
+        <button pButton icon="pi pi-bars" class="menu-toggle-button" (click)="toggleSidebar()"></button>
+        <img src="icons/logo.png" alt="Logo" class="topbar-logo">
+    </div>
+    <div class="topbar-right">
+        <i class="pi pi-th-large grid-icon" (click)="overlayPanel.toggle($event)"></i>
+        
+        <span class="font-bold">Director</span>
+        <p-avatar image="icons/image.png" shape="circle"></p-avatar>
+        
+        <p-overlayPanel #overlayPanel>
+            <div class="overlay-content">
+                <!-- Botón de Cerrar sesión sin estilos adicionales -->
+                <button class="logout-button" (click)="logout()">Cerrar sesión</button>
+            </div>
+        </p-overlayPanel>
+    </div>
+</div>
+
+
+
+<!-- Barra lateral -->
+<div class="sidebar-container" [ngClass]="{'collapsed': isCollapsed}">
+    <div class="menu-items">
+      <a
+        [routerLink]="['./estadisticos-direc']"
+        class="menu-item p-d-flex p-ai-center p-jc-start"
+        [ngClass]="{'selected': selectedItem === 'estadisticos'}"
+        (click)="selectItem('estadisticos-direc')">
+        <i class="pi pi-chart-pie p-mr-2"></i>
+        <span class="menu-text">Estadisticos</span>
+      </a>
+      <a
+        [routerLink]="['./coordinadores-direc']"
+        class="menu-item p-d-flex p-ai-center p-jc-start"
+        [ngClass]="{'selected': selectedItem === 'coordinadores'}"
+        (click)="selectItem('coordinadores')">
+        <i class="pi pi-user p-mr-2"></i>
+        <span class="menu-text">Gestión de Usuarios</span>
+      </a>
+    </div>
+</div>
+
+<div class="main-content">
+    <router-outlet></router-outlet>
+</div>

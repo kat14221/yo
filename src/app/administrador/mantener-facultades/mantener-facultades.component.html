@@ -1,0 +1,66 @@
+<div class="p-4">
+  <h4 class="text-xl font-bold mb-4">Gestión de Facultades</h4>
+
+  <div class="grid">
+      <!-- Panel izquierdo -->
+      <div class="col-12 md:col-6 lg:col-4 p-2">
+          <div class="surface-card p-4 shadow-2 border-round">
+              <div class="flex justify-content-between align-items-center mb-3">
+                  <h5>Campus</h5>
+                  <p-button icon="pi pi-plus" (click)="showCreateDialog('campus')" label="Nuevo"></p-button>
+              </div>
+
+              <div *ngFor="let campus of campusList" class="mb-3">
+                  <div class="flex align-items-center justify-content-between p-2 surface-100 border-round cursor-pointer"
+                       [class.surface-200]="selectedCampusId === campus.id"
+                       (click)="campus.id !== undefined ? selectCampus(campus.id) : null">
+                      <span>{{campus.sede}}</span>
+                      <i class="pi pi-chevron-right"></i>
+                  </div>
+
+                  <!-- Facultades -->
+                  <div *ngIf="selectedCampusId === campus.id" class="ml-3 mt-2">
+                      <div class="flex justify-content-between align-items-center mb-2">
+                          <h6>Facultades</h6>
+                          <p-button icon="pi pi-plus" (click)="showCreateDialog('facultad')" styleClass="p-button-sm"></p-button>
+                      </div>
+
+                      <div *ngFor="let facultad of facultades"
+                           class="flex align-items-center justify-content-between p-2 surface-50 border-round cursor-pointer mb-2"
+                           [class.surface-200]="selectedFacultadId === facultad.id"
+                           (click)="facultad.id !== undefined ? selectFacultad(facultad.id) : null">
+                          <span>{{facultad.nombre}}</span>
+                          <i class="pi pi-chevron-right"></i>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Panel derecho -->
+      <div class="col-12 md:col-6 lg:col-8 p-2">
+          <div class="surface-card p-4 shadow-2 border-round">
+              <div class="flex justify-content-between align-items-center mb-3">
+                  <h5>Escuelas Profesionales</h5>
+                  <p-button icon="pi pi-plus" (click)="showCreateDialog('escuela')"
+                           [disabled]="!selectedFacultadId" label="Nueva"></p-button>
+              </div>
+
+              <p-table [value]="escuelas" [paginator]="true" [rows]="10">
+                  <ng-template pTemplate="header">
+                      <tr>
+                          <th>ID</th>
+                          <th>Nombre</th>
+                      </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-escuela>
+                      <tr>
+                          <td>{{escuela.id}}</td>
+                          <td>{{escuela.carrera}}</td>
+                      </tr>
+                  </ng-template>
+              </p-table>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,187 @@
+<h4 style="font-size: 1em; font-weight: bold; text-align: left; margin: 0; padding-left: 1rem; margin-top: -0rem;">gestionar carta de presentación</h4>
+<!-- Botón de Regresar -->
+<div class="button-container flex justify-content-end align-items-center mt-3 mr-4">
+    <p-button label="REGRESAR" icon="pi pi-arrow-left" styleClass="logout-button" (click)="onBack()" 
+              [style]="{'background-color': '#ffa500', 'color': '#fff', 'font-size': '0.6em', 'padding': '0.3em 1em', 'border-radius': '5px', 'border': 'none'}">
+    </p-button>
+</div>
+  <!-- Barra horizontal -->
+<div 
+class="filter-bar p-1 surface-50 border-round shadow-1 flex align-items-center gap-3" 
+style="width: 100%; max-width: 10000px; margin-top: 0.5rem;">
+  
+  <!-- Dropdown con texto centrado -->
+  <p-dropdown 
+  [options]="years" 
+  [(ngModel)]="selectedYear" 
+  [style]="{'width': '250px', 'height': '33px'}" 
+  styleClass="text-left" 
+  placeholder="Seleccionar">
+</p-dropdown>
+
+</div>
+
+
+<div 
+  class="flex gap-3 justify-content-start align-items-start mt-3"
+  style="width: 100%; height: 100%;">
+
+  <!-- Contenedor de cartas (lado izquierdo) -->
+  <div 
+    class="surface-50 border-round shadow-2 p-3 flex flex-column gap-2"
+    style="width: 300px; height: 500px; font-size: 0.8rem;">
+
+    <!-- Título -->
+    <h3 class="mb-2 mt-0" style="font-size: 1rem;">Cartas</h3>
+
+    <!-- Campo de búsqueda -->
+    <div class="flex align-items-center gap-1">
+      <i class="pi pi-search" style="font-size: 0.9rem;"></i>
+      <input 
+        type="text" 
+        pInputText 
+        placeholder="buscar" 
+        [(ngModel)]="searchQuery"
+        class="w-full" 
+        style="border: 1px solid #dcdcdc; border-radius: 5px; padding: 0.3rem;" />
+    </div>
+
+    <!-- Lista de cartas -->
+    <div *ngFor="let carta of cartas" class="surface-100 border-round shadow-1 p-2 flex justify-content-between align-items-center" style="font-size: 0.8rem;">
+      <div>
+        <small>{{ carta.fecha }}</small>
+        <div><b>Nombre:</b> {{ carta.nombre }}</div>
+        <div><b>Ruc:</b> ***** <b>Línea:</b> {{ carta.linea }}</div>
+      </div>
+      <div class="circle bg-yellow-400" style="width: 20px; height: 20px; border-radius: 50%;"></div> <!-- Icono más pequeño -->
+    </div>
+  </div>
+
+  <!-- Contenedor de formulario (lado derecho) -->
+  <div 
+  class="surface-50 border-round shadow-2 p-3 flex flex-column gap-2"
+  style="width: 800px; height: 500px; font-size: 0.85rem;"> <!-- Fuente más pequeña -->
+
+  <!-- Título principal -->
+  <h3 class="mb-2 mt-0" style="font-size: 1rem;">Crear nueva carta de presentación</h3>
+
+  <!-- Línea de carrera y RUC -->
+  <div class="flex gap-2">
+    <div class="flex flex-column w-6">
+      <label for="lineaCarrera">Seleccionar una línea de carrera</label>
+      <p-dropdown 
+        id="lineaCarrera" 
+        [options]="lineasCarrera" 
+        [(ngModel)]="selectedLinea" 
+        [style]="{'width': '100%', 'height': '30px', 'font-size': '0.85rem'}">
+      </p-dropdown>
+    </div>
+    <div class="flex flex-column w-6">
+      <label for="ruc">RUC de la empresa</label>
+      <input 
+        id="ruc" 
+        type="text" 
+        pInputText 
+        style="width: 100%; height: 30px; font-size: 0.85rem;" />
+    </div>
+  </div>
+
+  <!-- Área de prácticas y Nombre de la empresa -->
+  <div class="flex gap-2">
+    <div class="flex flex-column w-6">
+      <label for="areaPracticas">Área de prácticas</label>
+      <input 
+        id="areaPracticas" 
+        type="text" 
+        pInputText  
+        style="width: 100%; height: 30px; font-size: 0.85rem;" />
+    </div>
+    <div class="flex flex-column w-6">
+      <label for="nombreEmpresa">Nombre de la empresa</label>
+      <input 
+        id="nombreEmpresa" 
+        type="text" 
+        pInputText 
+        style="width: 100%; height: 30px; font-size: 0.85rem;" />
+    </div>
+  </div>
+
+  <!-- Dirección y Descripción -->
+  <div class="flex flex-column">
+    <label for="direccion">Dirección física de la empresa</label>
+    <input 
+      id="direccion" 
+      type="text" 
+      pInputText 
+      style="width: 100%; height: 30px; font-size: 0.85rem;" />
+  </div>
+  <div class="flex flex-column">
+    <label for="descripcion">Descripción de las actividades</label>
+    <textarea 
+      id="descripcion" 
+      pInputTextarea 
+      rows="2" 
+      style="width: 100%; height: 50px; font-size: 0.85rem;"></textarea>
+  </div>
+
+  <!-- Descripción de representante -->
+  <h4 class="mt-2 mb-2" style="font-size: 1rem;">Descripción de Representante</h4>
+  <div class="flex gap-2">
+    <div class="flex flex-column w-6">
+      <label for="nombres">Nombres</label>
+      <input 
+        id="nombres" 
+        type="text" 
+        pInputText 
+        style="width: 100%; height: 30px; font-size: 0.85rem;" />
+    </div>
+    <div class="flex flex-column w-6">
+      <label for="cargo">Cargo</label>
+      <input 
+        id="cargo" 
+        type="text" 
+        pInputText 
+        style="width: 100%; height: 30px; font-size: 0.85rem;" />
+    </div>
+  </div>
+  <div class="flex gap-2">
+    <div class="flex flex-column w-6">
+      <label for="apellidos">Apellidos</label>
+      <input 
+        id="apellidos" 
+        type="text" 
+        pInputText 
+        style="width: 100%; height: 30px; font-size: 0.85rem;" />
+    </div>
+    <div class="flex flex-column w-6">
+      <label for="telefono">Teléfono</label>
+      <input 
+        id="telefono" 
+        type="text" 
+        pInputText 
+        style="width: 100%; height: 30px; font-size: 0.85rem;" />
+    </div>
+  </div>
+  <div class="flex gap-2">
+    <div class="flex flex-column w-6 gap-1">
+      <label for="correo">Correo electrónico</label>
+      <input 
+        id="correo" 
+        type="email" 
+        pInputText 
+        style="width: 100%; height: 30px; font-size: 0.85rem;" />
+    </div>
+    <div class="flex justify-content-end align-items-center w-6">
+      <button 
+        pButton 
+        type="button" 
+        label="Solicitar validación" 
+        class="p-button-primary" 
+        style="font-size: 0.85rem; height: 40px; width: 120px; margin-right: 0;">
+      </button>
+    </div>
+  </div>
+  
+
+
+</div>

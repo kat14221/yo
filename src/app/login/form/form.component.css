@@ -1,0 +1,15 @@
+.login-container {
+  min-height: 100vh;
+  background-color: var(--surface-ground);
+}
+
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface-card);
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+}
