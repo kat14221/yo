@@ -1,0 +1,97 @@
+<div class="asignar-container">
+  <!-- Panel izquierdo -->
+  <div class="panel-izquierdo">
+    <h3>Ingeniería de sistemas</h3>
+    <div class="control-panel">
+        <div class="selector">
+          <label for="semestre">Semestre</label>
+          <select id="semestre" [(ngModel)]="filtroSemestre" (change)="filtrarDatos()">
+            <option *ngFor="let sem of semestre" [value]="sem">{{ sem }}</option>
+          </select>
+        </div>
+      
+        <div class="linea-control">
+          <span>{{ filtroLinea }}</span>
+          <div class="flechas">
+            <button (click)="cambiarLinea(-1)" [disabled]="lineas.indexOf(filtroLinea) === 0">&#8249;</button>
+            <button (click)="cambiarLinea(1)" [disabled]="lineas.indexOf(filtroLinea) === lineas.length - 1">&#8250;</button>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <ul class="lista-ppps" *ngIf="ppps.length > 0; else noDataTemplate">
+          <li *ngFor="let ppp of ppps">
+            <div class="item">
+              <span class="icono">A</span>
+              <span class="nombre">{{ ppp.personas.nombre }} {{ ppp.personas.apellido }}</span>
+              <input type="checkbox" (change)="toggleSeleccion(ppp)" />
+            </div>
+          </li>
+        </ul>
+      
+        <!-- Plantilla para mostrar el mensaje cuando no hay datos -->
+        <ng-template #noDataTemplate>
+          <div class="no-data">
+            No se encontraron practicantes disponibles.
+          </div>
+        </ng-template>
+      </div>
+      
+  </div>
+
+  <!-- Panel derecho -->
+  <div class="panel-derecho">
+    <div class="filtros-superior">
+        <div class="mostrar-container">
+          <label for="mostrar">Mostrar</label>
+          <select id="mostrar" [(ngModel)]="mostrarTodos" class="mostrar-select">
+            <option value="10">10</option>
+            <option value="todos">Todos</option>
+          </select>
+        </div>
+        <div class="buscar-container">
+          <input
+            type="text"
+            placeholder="Buscar..."
+            [(ngModel)]="filtroNombreApellidoLinea"
+            class="buscar-input"
+          />
+        </div>
+      </div>
+      
+   
+    <div class="no-data">
+        límite de 30 estudiantes por tutor
+      </div>
+    <div class="lista-tutores">
+      <div class="tutor" *ngFor="let tutor of filtrarTutores(); index as i">
+        <div class="tutor-header">
+          <img src="https://via.placeholder.com/60" alt="Foto Tutor" class="tutor-foto" />
+          <div>
+            <p class="docente">Docente</p>
+            <p class="nombre">{{ tutor.personas.nombre }} {{ tutor.personas.apellido }}</p>
+          </div>
+          
+        </div>
+        <div class="tutor-detalles">
+          <p>Alumnos asignados: {{ tutor.asignados }}</p>
+          <p>línea: {{ tutor.lineas.nombre }}</p>
+        </div>
+        <div class="tutor-acciones">
+          <button (click)="agregarPracticantes(i)">Agregar</button>
+          <button (click)="verAsignados(tutor)">Inspeccionar</button>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  <button class="confirmar-btn" (click)="confirmarAsignaciones()">Confirmar</button>
+  <div
+  class="mensaje-emergente"
+  *ngIf="mostrarMensaje"
+  [@fadeInOut]>
+  Practicantes asignados exitosamente.
+</div>
+</div>

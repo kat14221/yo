@@ -33,6 +33,7 @@ import { CartaPresentacionComponent } from './coordinador/coordinador-carta-pres
 import { RequisitosFinalesComponent } from './coordinador/coordinador-requisitos-finales/requisitos-finales.component';
 import { PracticanteEpComponent } from './coordinador/coordinador-practicante-ep/practicante-ep.component';
 import { HomeComponent } from './coordinador/coordinador-home/home.component'; 
+import { CoordinadorAsignarComponent } from './coordinador/coordinador-asignar/coordinador-asignar.component';
 
 
 export const routes: Routes = [
@@ -113,6 +114,11 @@ export const routes: Routes = [
         path: 'comienzoppp',
         component: ComienzopppComponent,
         title: 'Comienzo de Practicas',
+      },
+      {
+        path: 'coordinador-asignar',
+        component: CoordinadorAsignarComponent,
+        title: 'Asignar',
       },
       {
         path: 'seguimientodeusuario',
